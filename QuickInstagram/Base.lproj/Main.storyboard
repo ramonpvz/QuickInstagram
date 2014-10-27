@@ -9,7 +9,7 @@
         <!--Photos-->
         <scene sceneID="5Ui-i0-JT5">
             <objects>
-                <viewController id="U01-Kx-4zU" sceneMemberID="viewController">
+                <viewController id="U01-Kx-4zU" customClass="PhotoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xZd-lD-rcp"/>
                         <viewControllerLayoutGuide type="bottom" id="yRG-YD-2gV"/>
@@ -41,13 +41,61 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Photos" id="Odf-FH-3Kk">
-                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="dQt-gy-NKJ"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="SIy-JB-yeJ"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="dQt-gy-NKJ">
+                            <connections>
+                                <action selector="cameraButtonTapped:" destination="U01-Kx-4zU" id="jNS-hm-C3T"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="SIy-JB-yeJ">
+                            <connections>
+                                <action selector="refresh:" destination="U01-Kx-4zU" id="hgd-K1-g9y"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="kT5-di-6eH" kind="presentation" id="lqs-JD-Gbl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfe-s9-XfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1208" y="-42"/>
+            <point key="canvasLocation" x="396" y="-30"/>
+        </scene>
+        <!--Photo Detail View Controller-->
+        <scene sceneID="lb6-I7-nzu">
+            <objects>
+                <viewController id="kT5-di-6eH" customClass="PhotoDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UgQ-Jf-qho"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Ct-cg-5OJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y96-BG-qIz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLm-ec-BUc">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Selected Photo" id="4FO-73-QMi">
+                                        <barButtonItem key="leftBarButtonItem" title="Close" id="1je-h2-j7E">
+                                            <connections>
+                                                <action selector="close:" destination="kT5-di-6eH" id="OK4-hc-Y6t"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PLm-ec-BUc" firstAttribute="leading" secondItem="y96-BG-qIz" secondAttribute="leading" id="8Rg-M2-7dZ"/>
+                            <constraint firstItem="PLm-ec-BUc" firstAttribute="top" secondItem="y96-BG-qIz" secondAttribute="top" id="KCb-nh-amF"/>
+                            <constraint firstAttribute="trailing" secondItem="PLm-ec-BUc" secondAttribute="trailing" id="jp1-u8-F84"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZI-60-wkU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1116" y="-30"/>
         </scene>
         <!--Friends-->
         <scene sceneID="Mcv-of-MIz">
@@ -391,7 +439,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sBP-li-t07" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="396" y="-42"/>
+            <point key="canvasLocation" x="-426" y="-30"/>
         </scene>
     </scenes>
 </document>

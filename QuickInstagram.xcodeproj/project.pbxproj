@@ -34,6 +34,8 @@
 		C33AF64319FEE4F800AAD6C2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33AF64019FEE4F800AAD6C2 /* Parse.framework */; };
 		C33AF64419FEE4F800AAD6C2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33AF64119FEE4F800AAD6C2 /* ParseFacebookUtils.framework */; };
 		E41128B819FEF93D000F7837 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128B719FEF93D000F7837 /* MBProgressHUD.m */; };
+		E41128BB19FF031B000F7837 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128BA19FF031B000F7837 /* PhotoViewController.m */; };
+		E41128BE19FF057A000F7837 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128BD19FF057A000F7837 /* PhotoDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,10 @@
 		C33AF64119FEE4F800AAD6C2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../../../../../Downloads/parse-library-1.4.2/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
 		E41128B619FEF93D000F7837 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E41128B719FEF93D000F7837 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E41128B919FF031B000F7837 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		E41128BA19FF031B000F7837 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		E41128BC19FF057A000F7837 /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
+		E41128BD19FF057A000F7837 /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +163,10 @@
 				C33AF60A19FEE3DC00AAD6C2 /* ViewController.h */,
 				C33AF60B19FEE3DC00AAD6C2 /* ViewController.m */,
 				C33AF60D19FEE3DC00AAD6C2 /* Main.storyboard */,
+				E41128B919FF031B000F7837 /* PhotoViewController.h */,
+				E41128BA19FF031B000F7837 /* PhotoViewController.m */,
+				E41128BC19FF057A000F7837 /* PhotoDetailViewController.h */,
+				E41128BD19FF057A000F7837 /* PhotoDetailViewController.m */,
 				C33AF61019FEE3DC00AAD6C2 /* Images.xcassets */,
 				C33AF61219FEE3DC00AAD6C2 /* LaunchScreen.xib */,
 				C33AF60719FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld */,
@@ -318,8 +328,10 @@
 				C33AF60619FEE3DC00AAD6C2 /* AppDelegate.m in Sources */,
 				C33AF60919FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld in Sources */,
 				E41128B819FEF93D000F7837 /* MBProgressHUD.m in Sources */,
+				E41128BB19FF031B000F7837 /* PhotoViewController.m in Sources */,
 				C33AF60C19FEE3DC00AAD6C2 /* ViewController.m in Sources */,
 				C33AF60319FEE3DC00AAD6C2 /* main.m in Sources */,
+				E41128BE19FF057A000F7837 /* PhotoDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
