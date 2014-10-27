@@ -33,6 +33,7 @@
 		C33AF64219FEE4F800AAD6C2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33AF63F19FEE4F800AAD6C2 /* Bolts.framework */; };
 		C33AF64319FEE4F800AAD6C2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33AF64019FEE4F800AAD6C2 /* Parse.framework */; };
 		C33AF64419FEE4F800AAD6C2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33AF64119FEE4F800AAD6C2 /* ParseFacebookUtils.framework */; };
+		E41128B819FEF93D000F7837 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128B719FEF93D000F7837 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		C33AF63F19FEE4F800AAD6C2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../../../Downloads/parse-library-1.4.2/Bolts.framework"; sourceTree = "<group>"; };
 		C33AF64019FEE4F800AAD6C2 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../../Downloads/parse-library-1.4.2/Parse.framework"; sourceTree = "<group>"; };
 		C33AF64119FEE4F800AAD6C2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../../../../../Downloads/parse-library-1.4.2/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
+		E41128B619FEF93D000F7837 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		E41128B719FEF93D000F7837 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,7 @@
 				C33AF61019FEE3DC00AAD6C2 /* Images.xcassets */,
 				C33AF61219FEE3DC00AAD6C2 /* LaunchScreen.xib */,
 				C33AF60719FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld */,
+				E41128B519FEF93D000F7837 /* ProgressBar */,
 				C33AF60019FEE3DC00AAD6C2 /* Supporting Files */,
 			);
 			path = QuickInstagram;
@@ -200,6 +204,15 @@
 				C33AF61E19FEE3DC00AAD6C2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E41128B519FEF93D000F7837 /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				E41128B619FEF93D000F7837 /* MBProgressHUD.h */,
+				E41128B719FEF93D000F7837 /* MBProgressHUD.m */,
+			);
+			path = ProgressBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +317,7 @@
 			files = (
 				C33AF60619FEE3DC00AAD6C2 /* AppDelegate.m in Sources */,
 				C33AF60919FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld in Sources */,
+				E41128B819FEF93D000F7837 /* MBProgressHUD.m in Sources */,
 				C33AF60C19FEE3DC00AAD6C2 /* ViewController.m in Sources */,
 				C33AF60319FEE3DC00AAD6C2 /* main.m in Sources */,
 			);

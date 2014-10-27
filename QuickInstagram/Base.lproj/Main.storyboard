@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RvX-it-fkV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RvX-it-fkV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -14,6 +15,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yRG-YD-2gV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sob-Fl-rYy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyE-gh-f1h">
@@ -53,6 +55,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ObT-Cv-SLW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2PX-pB-dh4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends list to see" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofk-S3-eYT">
@@ -115,7 +118,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NyH-qy-0oC">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NyH-qy-0oC">
                                 <rect key="frame" x="252" y="137" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="1fF-ma-CT9"/>
@@ -136,7 +139,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mBP-v0-ElH">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mBP-v0-ElH">
                                 <rect key="frame" x="252" y="137" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="Avt-oR-szy"/>
@@ -290,21 +293,21 @@
                                 <exclude reference="ePa-Xz-YwZ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="XdC-OQ-ip7"/>
+                                <exclude reference="eJE-oV-nOH"/>
+                                <exclude reference="3xm-iB-rQf"/>
+                                <exclude reference="nQJ-ZM-hCv"/>
+                                <exclude reference="L7a-I3-eSr"/>
+                                <exclude reference="Uw3-MG-I7X"/>
+                                <exclude reference="UM7-lK-qMX"/>
+                                <exclude reference="ybV-PQ-FEC"/>
+                                <exclude reference="7HN-ZW-2BM"/>
+                                <exclude reference="Jx5-66-Qs5"/>
+                                <exclude reference="mlg-D4-xp6"/>
                                 <exclude reference="IeJ-pI-tz2"/>
                                 <exclude reference="QeH-Vf-fKd"/>
                                 <exclude reference="aJs-Mq-29x"/>
                                 <exclude reference="auS-qQ-Hbb"/>
-                                <exclude reference="7HN-ZW-2BM"/>
-                                <exclude reference="Jx5-66-Qs5"/>
-                                <exclude reference="mlg-D4-xp6"/>
-                                <exclude reference="L7a-I3-eSr"/>
-                                <exclude reference="Uw3-MG-I7X"/>
-                                <exclude reference="3xm-iB-rQf"/>
-                                <exclude reference="nQJ-ZM-hCv"/>
-                                <exclude reference="XdC-OQ-ip7"/>
-                                <exclude reference="eJE-oV-nOH"/>
-                                <exclude reference="UM7-lK-qMX"/>
-                                <exclude reference="ybV-PQ-FEC"/>
                                 <exclude reference="8HS-Hb-Lx5"/>
                                 <exclude reference="CDQ-wa-wNY"/>
                                 <exclude reference="Ji4-sa-tyA"/>
@@ -321,21 +324,21 @@
                                 <include reference="ePa-Xz-YwZ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="XdC-OQ-ip7"/>
+                                <include reference="eJE-oV-nOH"/>
+                                <include reference="3xm-iB-rQf"/>
+                                <include reference="nQJ-ZM-hCv"/>
+                                <include reference="L7a-I3-eSr"/>
+                                <include reference="Uw3-MG-I7X"/>
+                                <include reference="UM7-lK-qMX"/>
+                                <include reference="ybV-PQ-FEC"/>
+                                <include reference="7HN-ZW-2BM"/>
+                                <include reference="Jx5-66-Qs5"/>
+                                <exclude reference="mlg-D4-xp6"/>
                                 <include reference="IeJ-pI-tz2"/>
                                 <include reference="QeH-Vf-fKd"/>
                                 <include reference="aJs-Mq-29x"/>
                                 <include reference="auS-qQ-Hbb"/>
-                                <include reference="7HN-ZW-2BM"/>
-                                <include reference="Jx5-66-Qs5"/>
-                                <exclude reference="mlg-D4-xp6"/>
-                                <include reference="L7a-I3-eSr"/>
-                                <include reference="Uw3-MG-I7X"/>
-                                <include reference="3xm-iB-rQf"/>
-                                <include reference="nQJ-ZM-hCv"/>
-                                <include reference="XdC-OQ-ip7"/>
-                                <include reference="eJE-oV-nOH"/>
-                                <include reference="UM7-lK-qMX"/>
-                                <include reference="ybV-PQ-FEC"/>
                                 <include reference="8HS-Hb-Lx5"/>
                                 <include reference="CDQ-wa-wNY"/>
                                 <include reference="Ji4-sa-tyA"/>
