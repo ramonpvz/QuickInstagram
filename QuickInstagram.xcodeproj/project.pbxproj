@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5A3255B19FEE87B00B50A7A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3255819FEE87B00B50A7A /* Bolts.framework */; };
+		A5A3255C19FEE87B00B50A7A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3255919FEE87B00B50A7A /* Parse.framework */; };
+		A5A3255D19FEE87B00B50A7A /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3255A19FEE87B00B50A7A /* ParseFacebookUtils.framework */; };
 		C33AF60319FEE3DC00AAD6C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60219FEE3DC00AAD6C2 /* main.m */; };
 		C33AF60619FEE3DC00AAD6C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60519FEE3DC00AAD6C2 /* AppDelegate.m */; };
 		C33AF60919FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60719FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld */; };
@@ -42,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A5A3255819FEE87B00B50A7A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		A5A3255919FEE87B00B50A7A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		A5A3255A19FEE87B00B50A7A /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		C33AF5FD19FEE3DC00AAD6C2 /* QuickInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33AF60119FEE3DC00AAD6C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C33AF60219FEE3DC00AAD6C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -77,11 +83,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5A3255B19FEE87B00B50A7A /* Bolts.framework in Frameworks */,
 				C33AF64219FEE4F800AAD6C2 /* Bolts.framework in Frameworks */,
 				C33AF64319FEE4F800AAD6C2 /* Parse.framework in Frameworks */,
 				C33AF64419FEE4F800AAD6C2 /* ParseFacebookUtils.framework in Frameworks */,
 				C33AF63E19FEE4B900AAD6C2 /* Accounts.framework in Frameworks */,
+				A5A3255D19FEE87B00B50A7A /* ParseFacebookUtils.framework in Frameworks */,
 				C33AF63C19FEE4AF00AAD6C2 /* AdSupport.framework in Frameworks */,
+				A5A3255C19FEE87B00B50A7A /* Parse.framework in Frameworks */,
 				C33AF63A19FEE49300AAD6C2 /* AudioToolbox.framework in Frameworks */,
 				C33AF63819FEE48A00AAD6C2 /* CFNetwork.framework in Frameworks */,
 				C33AF63619FEE47A00AAD6C2 /* CoreGraphics.framework in Frameworks */,
@@ -104,12 +113,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5A3255719FEE80D00B50A7A /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5A3255819FEE87B00B50A7A /* Bolts.framework */,
+				A5A3255919FEE87B00B50A7A /* Parse.framework */,
+				A5A3255A19FEE87B00B50A7A /* ParseFacebookUtils.framework */,
+			);
+			name = frameworks;
+			sourceTree = "<group>";
+		};
 		C33AF5F419FEE3DC00AAD6C2 = {
 			isa = PBXGroup;
 			children = (
 				C33AF5FF19FEE3DC00AAD6C2 /* QuickInstagram */,
 				C33AF61C19FEE3DC00AAD6C2 /* QuickInstagramTests */,
 				C33AF5FE19FEE3DC00AAD6C2 /* Products */,
+				A5A3255719FEE80D00B50A7A /* frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -406,6 +426,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/glbmxm0002/Downloads/parse-library-1.4.2",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickInstagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -420,6 +441,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/glbmxm0002/Downloads/parse-library-1.4.2",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickInstagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -480,6 +502,7 @@
 				C33AF62519FEE3DC00AAD6C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C33AF62619FEE3DC00AAD6C2 /* Build configuration list for PBXNativeTarget "QuickInstagramTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +511,7 @@
 				C33AF62819FEE3DC00AAD6C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
