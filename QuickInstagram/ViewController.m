@@ -7,9 +7,10 @@
 //
 
 #import "ViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface ViewController ()
-
+@interface ViewController ()<FBLoginViewDelegate>
+    @property (strong, nonatomic) id<FBGraphUser> loggedInUser;
 @end
 
 @implementation ViewController
@@ -19,9 +20,14 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [FBLoginView class];
+    return YES;
 }
 
+- (IBAction)login:(UIButton *)sender {
+}
+
+- (IBAction)signup:(UIButton *)sender {
+}
 @end
