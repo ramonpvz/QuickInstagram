@@ -17,12 +17,6 @@
 @property MBProgressHUD *HUD;
 @property MBProgressHUD *refreshHUD;
 
-#define PADDING_TOP 0 // For placing the images nicely in the grid
-#define PADDING 4
-#define THUMBNAIL_COLS 4
-#define THUMBNAIL_WIDTH 75
-#define THUMBNAIL_HEIGHT 75
-
 @end
 
 @implementation PhotoViewController
@@ -37,6 +31,187 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Main methods
 
+- (IBAction)refresh:(id)sender
+{
+    NSLog(@"Showing Refresh HUD");
+    self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.refreshHUD];
+
+    // Register for HUD callbacks so we can remove it from the window at the right time
+    self.refreshHUD.delegate = self;
+
+    // Show the HUD while the provided method executes in a new thread
+    [self.refreshHUD show:YES];
+
+    /*PFQuery *query = [PFQuery queryWithClassName:@"UserPhoto"];
+    PFUser *user = [PFUser currentUser];
+    [query whereKey:@"user" equalTo:user];
+    [query orderByAscending:@"createdAt"];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            if (self.refreshHUD) {
+                [self.refreshHUD hide:YES];
+
+                self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
+                [self.view addSubview:self.refreshHUD];
+
+                self.refreshHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+
+                // Set custom view mode
+                self.refreshHUD.mode = MBProgressHUDModeCustomView;
+
+                self.refreshHUD.delegate = self;
+            }
+            NSLog(@"Successfully retrieved %lu photos.", objects.count);
+
+
+            // Array of images
+            [self setUpImages:self.allImages];
+
+        } else {
+            [self.refreshHUD hide:YES];
+
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];*/
+    [self.refreshHUD hide:YES];
+}
+
+- (IBAction)cameraButtonTapped:(id)sender
+{
+    // Check for camera
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == YES) {
+        // Create image picker controller
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+
+        // Set source to the camera
+        imagePicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+
+        // Delegate is self
+        imagePicker.delegate = self;
+
+        // Show image picker
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    else{
+        // Device has no camera
+        // Create image picker controller
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+
+        // Set source to the camera
+        //imagePicker.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        imagePicker.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+
+        // Delegate is self
+        imagePicker.delegate = self;
+
+        // Show image picker
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+}
+
+- (void)uploadImage:(NSData *)imageData
+{
+    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
+
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+
+    // Set determinate mode
+    self.HUD.mode = MBProgressHUDModeDeterminate;
+    self.HUD.delegate = self;
+    self.HUD.labelText = @"Uploading";
+    [self.HUD show:YES];
+
+    // Save PFFile
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            //Hide determinate HUD
+            [self.HUD hide:YES];
+
+            // Show checkmark
+            self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.view addSubview:self.HUD];
+
+            self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+
+            // Set custom view mode
+            self.HUD.mode = MBProgressHUDModeCustomView;
+
+            self.HUD.delegate = self;
+
+            // Create a PFObject around a PFFile and associate it with the current user
+            PFObject *userPhoto = [PFObject objectWithClassName:@"UserPhoto"];
+            [userPhoto setObject:imageFile forKey:@"imageFile"];
+
+            // Set the access control list to current user for security purposes
+            userPhoto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+
+            PFUser *user = [PFUser currentUser];
+            [userPhoto setObject:user forKey:@"user"];
+
+            [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    [self refresh:nil];
+                }
+                else{
+                    // Log details of the failure
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
+        }
+        else{
+            [self.HUD hide:YES];
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    } progressBlock:^(int percentDone) {
+        // Update your progress spinner here. percentDone will be between 0 and 100.
+        self.HUD.progress = (float)percentDone/100;
+    }];
+}
+
+- (void)setUpImages:(NSArray *)images
+{
+    NSLog(@"setupImages method");
+}
+
+
+#pragma mark UIImagePickerControllerDelegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    // Access the uncropped image from info dictionary
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+
+    // Dismiss controller
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
+    // Resize image
+    UIGraphicsBeginImageContext(CGSizeMake(640, 960));
+    [image drawInRect: CGRectMake(0, 0, 640, 960)];
+    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Upload image
+    NSData *imageData = UIImageJPEGRepresentation(smallImage, 0.05f);
+    //[self uploadImage:imageData];
+
+    NSLog(@"Uploading photo");
+}
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD hides
+    [self.HUD removeFromSuperview];
+    self.HUD = nil;
+}
 
 @end
