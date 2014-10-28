@@ -13,6 +13,10 @@
 		A5A3255C19FEE87B00B50A7A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3255919FEE87B00B50A7A /* Parse.framework */; };
 		A5A3255D19FEE87B00B50A7A /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3255A19FEE87B00B50A7A /* ParseFacebookUtils.framework */; };
 		A5A3255F19FEE9A800B50A7A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A3255E19FEE9A800B50A7A /* FacebookSDK.framework */; };
+		A5DDD1D319FF508A00A4DDB8 /* FriendsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDD1D219FF508A00A4DDB8 /* FriendsListController.swift */; };
+		A5DDD1D719FF50B500A4DDB8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDD1D419FF50B500A4DDB8 /* DatabaseManager.swift */; };
+		A5DDD1D819FF50B500A4DDB8 /* MyFriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDD1D519FF50B500A4DDB8 /* MyFriendsListViewController.swift */; };
+		A5DDD1D919FF50B500A4DDB8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDD1D619FF50B500A4DDB8 /* User.swift */; };
 		C33AF60319FEE3DC00AAD6C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60219FEE3DC00AAD6C2 /* main.m */; };
 		C33AF60619FEE3DC00AAD6C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60519FEE3DC00AAD6C2 /* AppDelegate.m */; };
 		C33AF60919FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60719FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld */; };
@@ -57,6 +61,10 @@
 		A5A3255919FEE87B00B50A7A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		A5A3255A19FEE87B00B50A7A /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		A5A3255E19FEE9A800B50A7A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		A5DDD1D219FF508A00A4DDB8 /* FriendsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListController.swift; sourceTree = "<group>"; };
+		A5DDD1D419FF50B500A4DDB8 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		A5DDD1D519FF50B500A4DDB8 /* MyFriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFriendsListViewController.swift; sourceTree = "<group>"; };
+		A5DDD1D619FF50B500A4DDB8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C33AF5FD19FEE3DC00AAD6C2 /* QuickInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33AF60119FEE3DC00AAD6C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C33AF60219FEE3DC00AAD6C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -160,6 +168,10 @@
 		C33AF5FF19FEE3DC00AAD6C2 /* QuickInstagram */ = {
 			isa = PBXGroup;
 			children = (
+				A5DDD1D219FF508A00A4DDB8 /* FriendsListController.swift */,
+				A5DDD1D419FF50B500A4DDB8 /* DatabaseManager.swift */,
+				A5DDD1D519FF50B500A4DDB8 /* MyFriendsListViewController.swift */,
+				A5DDD1D619FF50B500A4DDB8 /* User.swift */,
 				A55CA0E819FF131F001E7F57 /* LoginViewController.swift */,
 				A55CA0E619FF1312001E7F57 /* SingupViewController.swift */,
 				C33AF60419FEE3DC00AAD6C2 /* AppDelegate.h */,
@@ -328,11 +340,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5DDD1D319FF508A00A4DDB8 /* FriendsListController.swift in Sources */,
 				A55CA0E919FF131F001E7F57 /* LoginViewController.swift in Sources */,
+				A5DDD1D719FF50B500A4DDB8 /* DatabaseManager.swift in Sources */,
 				C33AF60619FEE3DC00AAD6C2 /* AppDelegate.m in Sources */,
 				C33AF60919FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld in Sources */,
 				A55CA0E719FF1312001E7F57 /* SingupViewController.swift in Sources */,
 				E41128B819FEF93D000F7837 /* MBProgressHUD.m in Sources */,
+				A5DDD1D819FF50B500A4DDB8 /* MyFriendsListViewController.swift in Sources */,
+				A5DDD1D919FF50B500A4DDB8 /* User.swift in Sources */,
 				E41128BB19FF031B000F7837 /* PhotoViewController.m in Sources */,
 				C33AF60319FEE3DC00AAD6C2 /* main.m in Sources */,
 				E41128BE19FF057A000F7837 /* PhotoDetailViewController.m in Sources */,
