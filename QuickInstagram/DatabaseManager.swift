@@ -28,23 +28,28 @@ class DatabaseManager {
         return friends
     }
 
-    func getAllUsers() -> NSArray? {
+    func getAllUsersButLogged(userName : String) -> NSArray? {
         var friends = NSMutableArray()
+        var error : NSError?
 
-//        var error : NSError?
-//        var qry = PFQuery.
-//
-//        qry.orderByAscending("username")
-//
-//        var qryObjects = qry.findObjects(&error)
-//
-//        if error != nil {
-//            if qryObjects != nil {
-//                for obj in qryObjects {
-//                    println("object is:\(obj)")
-//                }
-//            }
-//        }
+        var qry = PFUser.query()
+        qry.whereKey("username", notEqualTo:userName)
+
+
+        qry.findObjectsInBackgroundWithBlock {
+            (results: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                for r in results {
+                    println("object is:\(r)")
+                }
+            }
+            else {
+                println("error:\(error)")
+            }
+        }
+
+
+
 
         return friends
     }

@@ -11,14 +11,24 @@ import UIKit
 
 class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var myFriends = NSMutableArray()
+    let db = DatabaseManager()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        db.getAllUsersButLogged("edu")
+    }
 
     //MARK - delegate table methods
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return myFriends.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+
+        cell.textLabel.text = "algo"
 
         return cell
     }

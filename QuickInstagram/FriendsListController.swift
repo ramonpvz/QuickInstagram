@@ -14,7 +14,6 @@ class FriendsListController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        db.getAllUsers()
 
     }
 
