@@ -132,7 +132,7 @@
 
 - (void)uploadImage:(NSData *)imageData caption:(NSString *)caption
 {
-    PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
+    PFFile *imageFile = [PFFile fileWithName:@"image.png" data:imageData];
 
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
@@ -208,15 +208,9 @@
 
     // Dismiss controller
     [picker dismissViewControllerAnimated:YES completion:nil];
-
-    // Resize image
-    UIGraphicsBeginImageContext(CGSizeMake(640, 960));
-    [image drawInRect: CGRectMake(0, 0, 640, 960)];
-    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
     
     // Upload image
-    NSData *imageData = UIImageJPEGRepresentation(smallImage, 0.05f);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5f);
 
 
     // Set caption
