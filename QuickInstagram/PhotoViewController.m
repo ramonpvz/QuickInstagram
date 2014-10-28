@@ -9,14 +9,19 @@
 #import "PhotoViewController.h"
 #import "PhotoDetailViewController.h"
 #import "QuickInstagram-Swift.h"
+#import "ImgCustomCell.h"
 
-@interface PhotoViewController ()
+@interface PhotoViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property IBOutlet UIScrollView *photoScrollView;
 @property NSMutableArray *allImages;
-
+@property NSArray *filteredResults;
+@property NSArray *results;
 @property MBProgressHUD *HUD;
 @property MBProgressHUD *refreshHUD;
+
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -24,14 +29,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //TODO esto es un ejemplo
+    [[self tableView] reloadData];
     NSLog(@"user=%@", DatabaseManager.loggedUser);
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    [self refreshDisplay];
+}
+
+- (void) refreshDisplay {
+    NSLog(@"Searching for: %@",self.searchBar.text);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hashtag = %@",self.searchBar.text];
+    PFQuery *query = [PFQuery queryWithClassName:@"Topic" predicate:predicate];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error)
+        {
+            NSLog(@"Error: %@", error.userInfo);
+        }
+        else
+        {
+            self.results = objects;
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - Main methods
@@ -216,5 +237,59 @@
     [self.HUD removeFromSuperview];
     self.HUD = nil;
 }
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    NSLog(@"filter content...");
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    return NO;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    return YES;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
+{
+    return YES;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(self.tableView == self.searchDisplayController.searchResultsTableView) {
+        return self.filteredResults.count;
+    }
+    return self.results.count;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *topic;
+    ImgCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ImgCustomCell"];
+    if (!cell) {
+        [self.tableView registerNib:[UINib nibWithNibName:@"ImgCustomCell" bundle:nil] forCellReuseIdentifier:@"ImgCustomCell"];
+        cell = [self.tableView dequeueReusableCellWithIdentifier:@"ImgCustomCell"];
+    }
+    if (self.tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        topic = [self.filteredResults objectAtIndex:indexPath.row];
+        cell.imgView = [topic objectForKey:@"icon"];
+        cell.hashtag.text = @"...";
+    }
+    else
+    {
+        topic = [self.results objectAtIndex:indexPath.row];
+        PFFile *file = [topic objectForKey:@"icon"];
+        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if(!error) {
+                cell.imgView.image = [UIImage imageWithData:data];
+            }
+        }];
+        cell.hashtag.text = [[topic objectForKey:@"hashtag"] description];
+    }
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    return cell;
+}
+
 
 @end

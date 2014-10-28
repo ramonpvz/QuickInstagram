@@ -35,7 +35,7 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
         var currentFriend = myFriends![indexPath.row] as User
 
-        cell.textLabel.text = currentFriend.userName
+        //cell.textLabel.text = currentFriend.userName
 
         return cell
     }
