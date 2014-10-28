@@ -15,7 +15,7 @@ class FriendsListController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        people = DatabaseManager.getAllUsersButUser(DatabaseManager.toUser(DatabaseManager.loggedUser).userName)
+        people = DatabaseManager.getAllUsersButUser(DatabaseManager.toUser(DatabaseManager.loggedUser!).userName)
     }
 
 

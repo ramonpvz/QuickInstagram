@@ -13,9 +13,16 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
 
     var myFriends : NSArray?
 
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser).friends
+        myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
     }
 
     //MARK - delegate table methods
@@ -32,4 +39,11 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
 
         return cell
     }
+
+    @IBAction func logout(sender: UIBarButtonItem) {
+        PFUser.logOut()
+        DatabaseManager.loggedUser = PFUser.currentUser()
+        tabBarController?.selectedIndex = 0
+    }
+
 }

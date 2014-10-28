@@ -109,14 +109,14 @@ class DatabaseManager : NSObject{
 
 
     class func addRelatedPearsonAs(person : User, asType : personType) {
-        var relation = loggedUser.relationForKey(asType.rawValue)
+        var relation = loggedUser?.relationForKey(asType.rawValue)
 
-        relation.addObject(getUserAsPFUser(person.userName))
-        loggedUser.save()
+        relation?.addObject(getUserAsPFUser(person.userName))
+        loggedUser?.save()
     }
 
-    internal class var loggedUser: PFUser {
-        get { return structUser.loggedUser! }
+    internal class var loggedUser: PFUser? {
+        get { return structUser.loggedUser }
         set { structUser.loggedUser = newValue }
     }
     

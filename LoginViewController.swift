@@ -12,18 +12,26 @@ import UIKit
 class LoginViewController: UIViewController, FBLoginViewDelegate {
 
     //MARK - View Properties
-
-
     @IBOutlet var password: UITextField!
     @IBOutlet var user: UITextField!
     @IBOutlet var fbLoginButton: FBLoginView!
-    let db = DatabaseManager()
-    var currenUser : PFUser?
 
     //MARK - helper functions
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if PFUser.currentUser() != nil {
+            println("Found logged user")
+            DatabaseManager.loggedUser = PFUser.currentUser()
+            tabBarController?.selectedIndex = 1
+        }
+        else {
+            tabBarController?.selectedIndex = 0
+        }
     }
 
     func showError(error : String) {
@@ -36,13 +44,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
 
     //MARK - View Actions
 
-    
     @IBAction func login(sender: UIButton) {
         var error : NSError?
-        currenUser = PFUser.logInWithUsername(user.text, password: password.text, error: &error)
-        if currenUser != nil {
-            //setting singleton instance og logged in user
-            DatabaseManager.loggedUser = currenUser!
+        //setting singleton instance og logged in user
+        DatabaseManager.loggedUser = PFUser.logInWithUsername(user.text, password: password.text, error: &error)
+        if DatabaseManager.loggedUser != nil {
             //changing to my friends tab
             tabBarController?.selectedIndex = 1
         }

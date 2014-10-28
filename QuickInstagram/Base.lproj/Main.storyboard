@@ -159,6 +159,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="My Friends" id="jR4-Ea-w8I">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="iHS-ZF-6ea">
+                            <connections>
+                                <action selector="logout:" destination="R2o-LF-kHk" id="iTd-Vl-X6P"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SwZ-EN-O0X">
                             <connections>
                                 <segue destination="3PJ-KH-fup" kind="show" id="64K-Gb-JkH"/>
