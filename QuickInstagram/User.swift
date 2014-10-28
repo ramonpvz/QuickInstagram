@@ -13,7 +13,9 @@ class User {
     var userName : String
     var userFacebook : String?
     var followers : NSArray?
-    var amigos : NSArray?
+    var friends : NSArray?
+
+
 
     init(userName : String) {
         self.userName = userName
