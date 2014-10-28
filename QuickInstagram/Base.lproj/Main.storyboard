@@ -131,7 +131,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Friends" id="ehe-c7-Oh1"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="friends" id="ehe-c7-Oh1"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DJR-1m-dDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -531,7 +531,7 @@
         <scene sceneID="zcw-f2-mP3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NMu-NK-eWn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Login" id="XIx-uB-klC"/>
+                    <tabBarItem key="tabBarItem" title="Login" image="inbox" id="XIx-uB-klC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jD6-HH-5t3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -550,7 +550,7 @@
         <scene sceneID="tGL-uL-b8d">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GTo-qF-DnX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Photos" id="GBH-W7-Kym"/>
+                    <tabBarItem key="tabBarItem" title="Photos" image="camera" id="GBH-W7-Kym"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="K17-IP-8Yf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -566,4 +566,9 @@
             <point key="canvasLocation" x="-426" y="-30"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="33" height="24"/>
+        <image name="friends" width="40" height="24"/>
+        <image name="inbox" width="32" height="21"/>
+    </resources>
 </document>
