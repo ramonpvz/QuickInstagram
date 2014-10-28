@@ -12,11 +12,16 @@ import UIKit
 class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var myFriends = NSMutableArray()
+    var currenUser : PFUser?
     let db = DatabaseManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        db.getAllUsersButLogged("edu")
+
+        
+        println("estatico user:\(DatabaseManager.loggedUser)")
+
+        
     }
 
     //MARK - delegate table methods

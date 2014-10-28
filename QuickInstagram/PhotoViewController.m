@@ -8,6 +8,7 @@
 
 #import "PhotoViewController.h"
 #import "PhotoDetailViewController.h"
+#import "QuickInstagram-Swift.h"
 
 @interface PhotoViewController ()
 
@@ -24,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //TODO esto es un ejemplo
+    NSLog(@"user=%@", DatabaseManager.loggedUser);
 }
 
 - (void)didReceiveMemoryWarning {

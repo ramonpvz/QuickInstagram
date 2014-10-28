@@ -13,22 +13,12 @@ class SingupViewController: UIViewController {
 
     @IBOutlet var user: UITextField!
     @IBOutlet var password: UITextField!
-
+    let db = DatabaseManager()
 
     @IBAction func signup(sender: AnyObject) {
         if validateFields() {
-            var newUser = PFUser()
-            newUser.username = user.text
-            newUser.password = password.text
-
-            if newUser.signUp() {
-                navigationController?.popToRootViewControllerAnimated(true)
-            }
-            else {
-                user.text = ""
-                password.text = ""
-                showError("Signup error, try again please...")
-            }
+            db.signupUser(user.text, password: password.text)
+            navigationController?.popToRootViewControllerAnimated(true)
         }
     }
 

@@ -17,6 +17,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     @IBOutlet var password: UITextField!
     @IBOutlet var user: UITextField!
     @IBOutlet var fbLoginButton: FBLoginView!
+    let db = DatabaseManager()
+    var currenUser : PFUser?
 
     //MARK - helper functions
     override func viewDidLoad() {
@@ -37,22 +39,25 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     @IBAction func login(sender: UIButton) {
         var error : NSError?
+        currenUser = PFUser.logInWithUsername(user.text, password: password.text, error: &error)
+        if currenUser != nil {
+            //setting logged user
+//            var navigationVC = tabBarController?.viewControllers![1] as UINavigationController
+//            var vc = navigationVC.viewControllers[0] as MyFriendsListViewController
+//            vc.currenUser = currenUser
 
-        var logedUser = PFUser.logInWithUsername(user.text, password: password.text, error: &error)
-        if logedUser != nil {
+            DatabaseManager.loggedUser = currenUser!
+
+
+
+            //changing to my friends tab
             tabBarController?.selectedIndex = 1
         }
         else {
             println("Error on login:\(error)")
             showError("Invalid login credentials")
         }
-
-
-        
-
     }
-
-
 }
 
 
