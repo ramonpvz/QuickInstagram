@@ -108,38 +108,29 @@
 
 - (IBAction)cameraButtonTapped:(id)sender
 {
+    // Create image picker controller
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    // Delegate is self
+    imagePicker.delegate = self;
+
     // Check for camera
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] == YES) {
-        // Create image picker controller
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-
         // Set source to the camera
         imagePicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
-
-        // Delegate is self
-        imagePicker.delegate = self;
-
-        // Show image picker
-        [self presentViewController:imagePicker animated:YES completion:nil];
     }
     else{
         // Device has no camera
-        // Create image picker controller
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
 
         // Set source to the camera
         //imagePicker.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         imagePicker.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
-
-        // Delegate is self
-        imagePicker.delegate = self;
-
-        // Show image picker
-        [self presentViewController:imagePicker animated:YES completion:nil];
     }
+
+    // Show image picker
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
-- (void)uploadImage:(NSData *)imageData
+- (void)uploadImage:(NSData *)imageData caption:(NSString *)caption
 {
     PFFile *imageFile = [PFFile fileWithName:@"Image.jpg" data:imageData];
 
@@ -170,13 +161,15 @@
             self.HUD.delegate = self;
 
             // Create a PFObject around a PFFile and associate it with the current user
-            PFObject *userPhoto = [PFObject objectWithClassName:@"UserPhoto"];
-            [userPhoto setObject:imageFile forKey:@"imageFile"];
+            PFObject *userPhoto = [PFObject objectWithClassName:@"Photo"];
+            [userPhoto setObject:imageFile forKey:@"image"];
+            [userPhoto setObject:caption forKey:@"caption"];
+
+            PFUser *user = DatabaseManager.loggedUser;
 
             // Set the access control list to current user for security purposes
-            userPhoto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+            userPhoto.ACL = [PFACL ACLWithUser:user];
 
-            PFUser *user = [PFUser currentUser];
             [userPhoto setObject:user forKey:@"user"];
 
             [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -224,13 +217,29 @@
     
     // Upload image
     NSData *imageData = UIImageJPEGRepresentation(smallImage, 0.05f);
-    //[self uploadImage:imageData];
 
-    NSLog(@"Uploading photo");
+
+    // Set caption
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Caption" message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Enter a caption";
+    }];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSLog(@"Uploading photo");
+        [self uploadImage:imageData caption:[alert.textFields[0] text]];
+
+    }];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel upload" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancelAction];
+    [alert addAction:okAction];
+
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
-#pragma mark -
-#pragma mark MBProgressHUDDelegate methods
+#pragma mark - MBProgressHUDDelegate methods
 
 - (void)hudWasHidden:(MBProgressHUD *)hud {
     // Remove HUD from screen when the HUD hides
