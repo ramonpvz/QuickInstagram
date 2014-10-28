@@ -33,7 +33,7 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
 
-        cell.textLabel.text = "algo"
+        //cell.textLabel.text = "algo"
 
         return cell
     }
