@@ -26,7 +26,7 @@ class DatabaseManager : NSObject{
 
         var qryObjects = qry.findObjects(&error)
 
-        return makeFriendInstance(qryObjects[0] as PFUser)
+        return toUser(qryObjects[0] as PFUser)
     }
 
     class func getUserAsPFUser(userName : String) ->  PFUser {
@@ -40,7 +40,7 @@ class DatabaseManager : NSObject{
         return qryObjects[0] as PFUser
     }
 
-    class func makeFriendInstance(pfUser : PFUser) -> User {
+    class func toUser(pfUser : PFUser) -> User {
         //creating instance of friend
         var user = User(userName: pfUser.username)
         var friends = NSMutableArray()
@@ -80,7 +80,7 @@ class DatabaseManager : NSObject{
             (results: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 for r in results {
-                    friends.addObject(self.makeFriendInstance(r as PFUser))
+                    friends.addObject(self.toUser(r as PFUser))
                 }
             }
             else {

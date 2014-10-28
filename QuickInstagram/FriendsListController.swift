@@ -22,15 +22,20 @@ class FriendsListController: UIViewController, UITableViewDataSource, UITableVie
 
 
     //MARK - delegate table methods
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return DatabaseManager.makeFriendInstance(DatabaseManager.loggedUser).friends!.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        var currentFriend = DatabaseManager.makeFriendInstance(DatabaseManager.loggedUser).friends?[indexPath.row] as User
+
+        cell.textLabel.text = currentFriend.userName
 
         return cell
     }
+
     //MARK - helper methods
     func showError(error : String) {
         let alertController = UIAlertController(title: "Error", message: error, preferredStyle: UIAlertControllerStyle.Alert)
