@@ -11,29 +11,24 @@ import UIKit
 
 class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var myFriends = NSMutableArray()
-    var currenUser : PFUser?
-    let db = DatabaseManager()
+    var myFriends : NSArray?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        println("estatico user:\(DatabaseManager.loggedUser)")
-
-        
+        myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser).friends
     }
 
     //MARK - delegate table methods
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myFriends.count
+        return myFriends!.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        var currentFriend = myFriends![indexPath.row] as User
 
-        //cell.textLabel.text = "algo"
+        //cell.textLabel.text = currentFriend.userName
 
         return cell
     }

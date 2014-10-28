@@ -10,9 +10,26 @@ import Foundation
 
 class DatabaseManager : NSObject{
 
+    enum personType : String {
+        case FRIEND = "friends"
+        case FOLLOWER = "followers"
+    }
+
     private struct structUser { static var loggedUser : PFUser? }
 
-    func getUser(userName : String) ->  PFUser {
+
+    class func getUser(userName : String) ->  User {
+        var error : NSError?
+
+        var qry = PFUser.query()
+        qry.whereKey("username", equalTo:userName)
+
+        var qryObjects = qry.findObjects(&error)
+
+        return toUser(qryObjects[0] as PFUser)
+    }
+
+    class func getUserAsPFUser(userName : String) ->  PFUser {
         var error : NSError?
 
         var qry = PFUser.query()
@@ -23,26 +40,35 @@ class DatabaseManager : NSObject{
         return qryObjects[0] as PFUser
     }
 
-
-    func getFriends(userName : String) -> NSArray? {
+    class func toUser(pfUser : PFUser) -> User {
+        //creating instance of friend
+        var user = User(userName: pfUser.username)
         var friends = NSMutableArray()
-        var error : NSError?
-        var qry = PFQuery(className: "User")
-        qry.whereKey("username", equalTo:userName)
+        var followers = NSMutableArray()
 
-        qry.orderByAscending("username")
-
-        var qryObjects = qry.findObjects(&error)
-
-        if error != nil {
-            if qryObjects != nil {
-
-            }
+        for f in getRelatedAs(pfUser, asType: personType.FRIEND)! {
+            friends.addObject(User(userName: f.username))
         }
-        return friends
+        for f in getRelatedAs(pfUser, asType: personType.FOLLOWER)! {
+            followers.addObject(User(userName: f.username))
+        }
+
+        user.friends = NSArray(array: friends)
+        user.followers = NSArray(array: followers)
+        
+        
+        return user
     }
 
-    func getAllUsersButUser(userName : String) -> NSArray? {
+
+    class func getRelatedAs(user : PFUser, asType : personType) -> NSArray? {
+        var relacion = user.relationForKey(asType.rawValue)
+        var qry = relacion.query()
+
+        return qry.findObjects()
+    }
+
+    class func getAllUsersButUser(userName : String) -> NSArray? {
         var friends = NSMutableArray()
         var error : NSError?
 
@@ -50,21 +76,26 @@ class DatabaseManager : NSObject{
         qry.whereKey("username", notEqualTo:userName)
 
 
-        qry.findObjectsInBackgroundWithBlock {
-            (results: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                for r in results {
-                    friends.addObject(r)
-                }
-            }
-            else {
-                println("error:\(error)")
-            }
+        for r in qry.findObjects() {
+            friends.addObject(self.toUser(r as PFUser))
         }
+
+
+//        qry.findObjectsInBackgroundWithBlock {
+//            (results: [AnyObject]!, error: NSError!) -> Void in
+//            if error == nil {
+//                for r in results {
+//                    friends.addObject(self.toUser(r as PFUser))
+//                }
+//            }
+//            else {
+//                println("error:\(error)")
+//            }
+//        }
         return friends
     }
 
-    func signupUser(user:String, password: String) {
+    class func signupUser(user:String, password: String) {
         var newUser = PFUser()
         newUser.username = user
         newUser.password = password
@@ -77,11 +108,11 @@ class DatabaseManager : NSObject{
     }
 
 
-    func addFollower(user : PFUser, follower : PFUser) {
-        var followers = user.relationForKey("followers")
+    class func addRelatedPearsonAs(person : User, asType : personType) {
+        var relation = loggedUser.relationForKey(asType.rawValue)
 
-        followers.addObject(follower)
-        user.save()
+        relation.addObject(getUserAsPFUser(person.userName))
+        loggedUser.save()
     }
 
     internal class var loggedUser: PFUser {

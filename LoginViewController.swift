@@ -41,15 +41,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         var error : NSError?
         currenUser = PFUser.logInWithUsername(user.text, password: password.text, error: &error)
         if currenUser != nil {
-            //setting logged user
-//            var navigationVC = tabBarController?.viewControllers![1] as UINavigationController
-//            var vc = navigationVC.viewControllers[0] as MyFriendsListViewController
-//            vc.currenUser = currenUser
-
+            //setting singleton instance og logged in user
             DatabaseManager.loggedUser = currenUser!
-
-
-
             //changing to my friends tab
             tabBarController?.selectedIndex = 1
         }
