@@ -41,6 +41,8 @@
 		E41128B819FEF93D000F7837 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128B719FEF93D000F7837 /* MBProgressHUD.m */; };
 		E41128BB19FF031B000F7837 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128BA19FF031B000F7837 /* PhotoViewController.m */; };
 		E41128BE19FF057A000F7837 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128BD19FF057A000F7837 /* PhotoDetailViewController.m */; };
+		E4BE72331A0044A4004E0967 /* ImgCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4BE72311A0044A4004E0967 /* ImgCustomCell.m */; };
+		E4BE72341A0044A4004E0967 /* ImgCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE72321A0044A4004E0967 /* ImgCustomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,9 @@
 		E41128BA19FF031B000F7837 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		E41128BC19FF057A000F7837 /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
 		E41128BD19FF057A000F7837 /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
+		E4BE72301A0044A4004E0967 /* ImgCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgCustomCell.h; sourceTree = "<group>"; };
+		E4BE72311A0044A4004E0967 /* ImgCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgCustomCell.m; sourceTree = "<group>"; };
+		E4BE72321A0044A4004E0967 /* ImgCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImgCustomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +183,9 @@
 				C33AF60519FEE3DC00AAD6C2 /* AppDelegate.m */,
 				C33AF60D19FEE3DC00AAD6C2 /* Main.storyboard */,
 				E41128B919FF031B000F7837 /* PhotoViewController.h */,
+				E4BE72301A0044A4004E0967 /* ImgCustomCell.h */,
+				E4BE72311A0044A4004E0967 /* ImgCustomCell.m */,
+				E4BE72321A0044A4004E0967 /* ImgCustomCell.xib */,
 				E41128BA19FF031B000F7837 /* PhotoViewController.m */,
 				E41128BC19FF057A000F7837 /* PhotoDetailViewController.h */,
 				E41128BD19FF057A000F7837 /* PhotoDetailViewController.m */,
@@ -322,6 +330,7 @@
 			files = (
 				C33AF60F19FEE3DC00AAD6C2 /* Main.storyboard in Resources */,
 				C33AF61419FEE3DC00AAD6C2 /* LaunchScreen.xib in Resources */,
+				E4BE72341A0044A4004E0967 /* ImgCustomCell.xib in Resources */,
 				C33AF61119FEE3DC00AAD6C2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +358,7 @@
 				E41128B819FEF93D000F7837 /* MBProgressHUD.m in Sources */,
 				A5DDD1D819FF50B500A4DDB8 /* MyFriendsListViewController.swift in Sources */,
 				A5DDD1D919FF50B500A4DDB8 /* User.swift in Sources */,
+				E4BE72331A0044A4004E0967 /* ImgCustomCell.m in Sources */,
 				E41128BB19FF031B000F7837 /* PhotoViewController.m in Sources */,
 				C33AF60319FEE3DC00AAD6C2 /* main.m in Sources */,
 				E41128BE19FF057A000F7837 /* PhotoDetailViewController.m in Sources */,
