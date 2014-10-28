@@ -76,17 +76,22 @@ class DatabaseManager : NSObject{
         qry.whereKey("username", notEqualTo:userName)
 
 
-        qry.findObjectsInBackgroundWithBlock {
-            (results: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                for r in results {
-                    friends.addObject(self.toUser(r as PFUser))
-                }
-            }
-            else {
-                println("error:\(error)")
-            }
+        for r in qry.findObjects() {
+            friends.addObject(self.toUser(r as PFUser))
         }
+
+
+//        qry.findObjectsInBackgroundWithBlock {
+//            (results: [AnyObject]!, error: NSError!) -> Void in
+//            if error == nil {
+//                for r in results {
+//                    friends.addObject(self.toUser(r as PFUser))
+//                }
+//            }
+//            else {
+//                println("error:\(error)")
+//            }
+//        }
         return friends
     }
 

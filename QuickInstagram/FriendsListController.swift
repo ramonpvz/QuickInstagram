@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 
 class FriendsListController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var db = DatabaseManager()
+
+    var people : NSArray?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        people = DatabaseManager.getAllUsersButUser(DatabaseManager.toUser(DatabaseManager.loggedUser).userName)
     }
 
 
@@ -24,14 +25,15 @@ class FriendsListController: UIViewController, UITableViewDataSource, UITableVie
     //MARK - delegate table methods
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DatabaseManager.makeFriendInstance(DatabaseManager.loggedUser).friends!.count
+        return people!.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
-        var currentFriend = DatabaseManager.makeFriendInstance(DatabaseManager.loggedUser).friends?[indexPath.row] as User
+        
+        var person = people![indexPath.row] as User
 
-        cell.textLabel.text = currentFriend.userName
+        cell.textLabel.text = person.userName
 
         return cell
     }
