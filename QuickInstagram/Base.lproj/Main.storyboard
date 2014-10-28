@@ -32,7 +32,7 @@
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="r0O-bc-qtK" customClass="ImgCustomCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCell" id="r0O-bc-qtK" customClass="ImgCustomCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r0O-bc-qtK" id="Aep-Xr-12c">
@@ -80,9 +80,10 @@
                                 <action selector="cameraButtonTapped:" destination="U01-Kx-4zU" id="jNS-hm-C3T"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="SIy-JB-yeJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="SIy-JB-yeJ">
                             <connections>
                                 <action selector="refresh:" destination="U01-Kx-4zU" id="hgd-K1-g9y"/>
+                                <segue destination="ROi-P4-lAl" kind="show" id="kG7-kZ-Bfz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -90,7 +91,7 @@
                         <outlet property="searchBar" destination="ktA-68-2vK" id="KuL-yV-woX"/>
                         <outlet property="searchDisplayController" destination="6XA-wp-t2Y" id="zyS-MZ-pNE"/>
                         <outlet property="tableView" destination="zxQ-Jr-ZzV" id="bpi-Gd-VNo"/>
-                        <segue destination="kT5-di-6eH" kind="presentation" id="lqs-JD-Gbl"/>
+                        <segue destination="kT5-di-6eH" kind="presentation" identifier="showDetailPhoto" id="lqs-JD-Gbl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfe-s9-XfQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,7 +105,54 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="396" y="-30"/>
+            <point key="canvasLocation" x="912" y="-36"/>
+        </scene>
+        <!--My Photos-->
+        <scene sceneID="d1a-0F-POA">
+            <objects>
+                <viewController id="ROi-P4-lAl" customClass="MyPhotosViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OYP-hw-1Ag"/>
+                        <viewControllerLayoutGuide type="bottom" id="3ZA-wV-8Xk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hnC-v5-8ul">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QLs-aO-ZW6">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GGZ-rA-xNR">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="image" id="ErS-h2-mkd">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QLs-aO-ZW6" firstAttribute="top" secondItem="hnC-v5-8ul" secondAttribute="top" id="3zn-9r-SQQ"/>
+                            <constraint firstAttribute="bottom" secondItem="QLs-aO-ZW6" secondAttribute="bottom" id="F8m-AA-WBx"/>
+                            <constraint firstAttribute="trailing" secondItem="QLs-aO-ZW6" secondAttribute="trailing" id="d53-sa-ziY"/>
+                            <constraint firstItem="QLs-aO-ZW6" firstAttribute="leading" secondItem="hnC-v5-8ul" secondAttribute="leading" id="xNa-Qy-NL5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="My Photos" id="R0v-dg-DpJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50F-Xt-WlD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1776" y="-36"/>
         </scene>
         <!--Photo Detail View Controller-->
         <scene sceneID="lb6-I7-nzu">
@@ -141,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZI-60-wkU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1116" y="-30"/>
+            <point key="canvasLocation" x="912" y="699"/>
         </scene>
         <!--My Friends-->
         <scene sceneID="Mcv-of-MIz">
@@ -503,14 +551,14 @@
                                 <exclude reference="7HN-ZW-2BM"/>
                                 <exclude reference="Jx5-66-Qs5"/>
                                 <exclude reference="mlg-D4-xp6"/>
-                                <exclude reference="IeJ-pI-tz2"/>
-                                <exclude reference="QeH-Vf-fKd"/>
-                                <exclude reference="aJs-Mq-29x"/>
-                                <exclude reference="auS-qQ-Hbb"/>
                                 <exclude reference="8HS-Hb-Lx5"/>
                                 <exclude reference="CDQ-wa-wNY"/>
                                 <exclude reference="Ji4-sa-tyA"/>
                                 <exclude reference="xWL-06-hjX"/>
+                                <exclude reference="IeJ-pI-tz2"/>
+                                <exclude reference="QeH-Vf-fKd"/>
+                                <exclude reference="aJs-Mq-29x"/>
+                                <exclude reference="auS-qQ-Hbb"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -534,14 +582,14 @@
                                 <include reference="7HN-ZW-2BM"/>
                                 <include reference="Jx5-66-Qs5"/>
                                 <exclude reference="mlg-D4-xp6"/>
-                                <include reference="IeJ-pI-tz2"/>
-                                <include reference="QeH-Vf-fKd"/>
-                                <include reference="aJs-Mq-29x"/>
-                                <include reference="auS-qQ-Hbb"/>
                                 <include reference="8HS-Hb-Lx5"/>
                                 <include reference="CDQ-wa-wNY"/>
                                 <include reference="Ji4-sa-tyA"/>
                                 <include reference="xWL-06-hjX"/>
+                                <include reference="IeJ-pI-tz2"/>
+                                <include reference="QeH-Vf-fKd"/>
+                                <include reference="aJs-Mq-29x"/>
+                                <include reference="auS-qQ-Hbb"/>
                             </mask>
                         </variation>
                     </view>
@@ -711,7 +759,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sBP-li-t07" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-426" y="-30"/>
+            <point key="canvasLocation" x="24" y="-36"/>
         </scene>
         <!--Friends-->
         <scene sceneID="2Sv-Gz-21O">
