@@ -7,8 +7,11 @@
 //
 
 #import "PhotoDetailViewController.h"
+#import "ILike.h"
 
 @interface PhotoDetailViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UILabel *countLikes;
 
 @end
 
@@ -16,12 +19,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.photoImageView.image = self.selectedImage;
+    self.imageView.image = [UIImage imageWithData:[NSData dataWithData:self.photo.image.getData]];
+    [self displayLikes];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)displayLikes {
+    
+    PFQuery *queryForLikes = [ILike query];
+    [queryForLikes whereKey:@"photo" equalTo:self.photo];
+    [queryForLikes findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSLog(@"Total of likes: %lu", (unsigned long)objects.count);
+        NSString *txt = [NSString stringWithFormat:@"%li", objects.count];
+        self.countLikes.text = txt;
+    }];
+
+}
+
+- (IBAction)like:(id)sender {
+    
+    ILike *like = [ILike object];
+    IUser *user = [IUser object];
+    user.name = @"Mary";
+    user.gender = @"Female";
+    user.quote = @"Anything...";
+    like.user = user;
+    like.photo = self.photo;
+
+    [like saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"Like saved...");
+        [self displayLikes];
+    }];
+
 }
 
 //Close the view controller

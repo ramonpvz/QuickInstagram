@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPhoto.h"
 
 @interface PhotoDetailViewController : UIViewController
 
-@property (nonatomic, retain) IBOutlet UIImageView *photoImageView;
 @property (nonatomic, retain) UIImage *selectedImage;
 @property (nonatomic, retain) NSString *imageName;
+@property IPhoto *photo;
 
 - (IBAction)close:(id)sender;
 

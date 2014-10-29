@@ -10,6 +10,12 @@
 #import "PhotoDetailViewController.h"
 #import "QuickInstagram-Swift.h"
 #import "ImgCustomCell.h"
+#import "TopicViewController.h"
+#import "ITopic.h"
+#import "IPhoto.h"
+#import "IComment.h"
+#import "ILike.h"
+#import "IUser.h"
 
 @interface PhotoViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate>
 
@@ -52,8 +58,8 @@
 
 - (void) refreshDisplay {
     NSLog(@"Searching for: %@",self.searchBar.text);
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hashtag = %@",self.searchBar.text];
-    PFQuery *query = [PFQuery queryWithClassName:@"Topic" predicate:predicate];
+    PFQuery *query = [PFQuery queryWithClassName:[ITopic parseClassName]];
+    [query whereKey:@"hashtag" equalTo:self.searchBar.text];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error)
         {
@@ -71,6 +77,7 @@
 
 - (IBAction)refresh:(id)sender
 {
+
     NSLog(@"Showing Refresh HUD");
     self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.refreshHUD];
@@ -253,6 +260,20 @@
     self.HUD = nil;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"wallSegue" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)collectionImageView {
+    
+    if ([segue.identifier isEqualToString:@"wallSegue"])
+    {
+        TopicViewController *targetVC = segue.destinationViewController;
+        targetVC.topic = [self.results objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    }
+
+}
+
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
     NSLog(@"filter content...");
 }
@@ -279,7 +300,7 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *topic;
+    ITopic *topic;
     ImgCustomCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ImgCustomCell"];
     if (!cell) {
         [self.tableView registerNib:[UINib nibWithNibName:@"ImgCustomCell" bundle:nil] forCellReuseIdentifier:@"ImgCustomCell"];
@@ -288,19 +309,24 @@
     if (self.tableView == self.searchDisplayController.searchResultsTableView)
     {
         topic = [self.filteredResults objectAtIndex:indexPath.row];
-        cell.imgView = [topic objectForKey:@"icon"];
-        cell.hashtag.text = @"...";
-    }
-    else
-    {
-        topic = [self.results objectAtIndex:indexPath.row];
-        PFFile *file = [topic objectForKey:@"icon"];
+        PFFile *file = topic.icon;
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if(!error) {
                 cell.imgView.image = [UIImage imageWithData:data];
             }
         }];
-        cell.hashtag.text = [[topic objectForKey:@"hashtag"] description];
+        cell.hashtag.text = @"...";
+    }
+    else
+    {
+        topic = [self.results objectAtIndex:indexPath.row];
+        PFFile *file = topic.icon;
+        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if(!error) {
+                cell.imgView.image = [UIImage imageWithData:data];
+            }
+        }];
+        cell.hashtag.text = topic.hashtag;
     }
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
