@@ -14,10 +14,21 @@ class SingupViewController: UIViewController {
     @IBOutlet var user: UITextField!
     @IBOutlet var password: UITextField!
 
+
     @IBAction func signup(sender: AnyObject) {
         if validateFields() {
-            DatabaseManager.signupUser(user.text, password: password.text)
-            navigationController?.popToRootViewControllerAnimated(true)
+            var newUser = PFUser()
+            newUser.username = user.text
+            newUser.password = password.text
+
+            if newUser.signUp() {
+                navigationController?.popToRootViewControllerAnimated(true)
+            }
+            else {
+                user.text = ""
+                password.text = ""
+                showError("Signup error, try again please...")
+            }
         }
     }
 
@@ -34,7 +45,7 @@ class SingupViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
     }
-
-
-
+    
+    
+    
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RvX-it-fkV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RvX-it-fkV">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -263,6 +263,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="myFriendsTableView" destination="Ibr-Ze-vj7" id="TTb-D7-4h1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DJR-1m-dDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -328,6 +331,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="friendsTableView" destination="rdw-Ix-5ut" id="qFS-fD-gXB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0n-PB-ugG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -551,14 +557,14 @@
                                 <exclude reference="7HN-ZW-2BM"/>
                                 <exclude reference="Jx5-66-Qs5"/>
                                 <exclude reference="mlg-D4-xp6"/>
-                                <exclude reference="8HS-Hb-Lx5"/>
-                                <exclude reference="CDQ-wa-wNY"/>
-                                <exclude reference="Ji4-sa-tyA"/>
-                                <exclude reference="xWL-06-hjX"/>
                                 <exclude reference="IeJ-pI-tz2"/>
                                 <exclude reference="QeH-Vf-fKd"/>
                                 <exclude reference="aJs-Mq-29x"/>
                                 <exclude reference="auS-qQ-Hbb"/>
+                                <exclude reference="8HS-Hb-Lx5"/>
+                                <exclude reference="CDQ-wa-wNY"/>
+                                <exclude reference="Ji4-sa-tyA"/>
+                                <exclude reference="xWL-06-hjX"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -582,14 +588,14 @@
                                 <include reference="7HN-ZW-2BM"/>
                                 <include reference="Jx5-66-Qs5"/>
                                 <exclude reference="mlg-D4-xp6"/>
-                                <include reference="8HS-Hb-Lx5"/>
-                                <include reference="CDQ-wa-wNY"/>
-                                <include reference="Ji4-sa-tyA"/>
-                                <include reference="xWL-06-hjX"/>
                                 <include reference="IeJ-pI-tz2"/>
                                 <include reference="QeH-Vf-fKd"/>
                                 <include reference="aJs-Mq-29x"/>
                                 <include reference="auS-qQ-Hbb"/>
+                                <include reference="8HS-Hb-Lx5"/>
+                                <include reference="CDQ-wa-wNY"/>
+                                <include reference="Ji4-sa-tyA"/>
+                                <include reference="xWL-06-hjX"/>
                             </mask>
                         </variation>
                     </view>

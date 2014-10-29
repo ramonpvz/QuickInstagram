@@ -9,20 +9,27 @@
 import Foundation
 import UIKit
 
-class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, dbProtocol {
+    //MARK - view properties
+    @IBOutlet var myFriendsTableView: UITableView!
+    //MARK - classs properties
     var myFriends : NSArray?
 
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DatabaseManager.delegate = self
         myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
+        myFriendsTableView.reloadData()
+    }
+    //MARK - delegate DB methods
+    func loadDataFinished() {
+        myFriendsTableView.reloadData()
     }
 
     //MARK - delegate table methods
@@ -35,7 +42,7 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
         var currentFriend = myFriends![indexPath.row] as User
 
-        //cell.textLabel.text = currentFriend.userName
+        cell.textLabel.text = currentFriend.userName
 
         return cell
     }
@@ -45,5 +52,5 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
         DatabaseManager.loggedUser = PFUser.currentUser()
         tabBarController?.selectedIndex = 0
     }
-
+    
 }

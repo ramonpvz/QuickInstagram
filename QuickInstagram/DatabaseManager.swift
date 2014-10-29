@@ -8,6 +8,10 @@
 
 import Foundation
 
+@objc protocol dbProtocol {
+    func loadDataFinished()
+}
+
 class DatabaseManager : NSObject{
 
     enum personType : String {
@@ -15,7 +19,10 @@ class DatabaseManager : NSObject{
         case FOLLOWER = "followers"
     }
 
-    private struct structUser { static var loggedUser : PFUser? }
+    private struct structUser {
+        static var loggedUser : PFUser?
+        static var delegate : dbProtocol?
+    }
 
 
     class func getUser(userName : String) ->  User {
@@ -55,8 +62,7 @@ class DatabaseManager : NSObject{
 
         user.friends = NSArray(array: friends)
         user.followers = NSArray(array: followers)
-        
-        
+
         return user
     }
 
@@ -81,17 +87,17 @@ class DatabaseManager : NSObject{
         }
 
 
-//        qry.findObjectsInBackgroundWithBlock {
-//            (results: [AnyObject]!, error: NSError!) -> Void in
-//            if error == nil {
-//                for r in results {
-//                    friends.addObject(self.toUser(r as PFUser))
-//                }
-//            }
-//            else {
-//                println("error:\(error)")
-//            }
-//        }
+        //        qry.findObjectsInBackgroundWithBlock {
+        //            (results: [AnyObject]!, error: NSError!) -> Void in
+        //            if error == nil {
+        //                for r in results {
+        //                    friends.addObject(self.toUser(r as PFUser))
+        //                }
+        //            }
+        //            else {
+        //                println("error:\(error)")
+        //            }
+        //        }
         return friends
     }
 
@@ -107,17 +113,33 @@ class DatabaseManager : NSObject{
         });
     }
 
-
     class func addRelatedPearsonAs(person : User, asType : personType) {
         var relation = loggedUser?.relationForKey(asType.rawValue)
 
         relation?.addObject(getUserAsPFUser(person.userName))
-        loggedUser?.save()
+        //loggedUser?.save()
+        loggedUser?.saveInBackgroundWithBlock({ (succeeded : Bool, error : NSError!) -> Void in
+            self.delegate!.loadDataFinished()
+        })
+    }
+
+    class func deleteRelatedPearsonAs(person : User, asType : personType) {
+        var relation = loggedUser?.relationForKey(asType.rawValue)
+
+        relation?.removeObject(getUserAsPFUser(person.userName))
+        loggedUser?.saveInBackgroundWithBlock({ (succeeded : Bool, error : NSError!) -> Void in
+            self.delegate!.loadDataFinished()
+        })
     }
 
     internal class var loggedUser: PFUser? {
         get { return structUser.loggedUser }
         set { structUser.loggedUser = newValue }
+    }
+    
+    internal class var delegate: dbProtocol? {
+        get { return structUser.delegate }
+        set { structUser.delegate = newValue }
     }
     
     
