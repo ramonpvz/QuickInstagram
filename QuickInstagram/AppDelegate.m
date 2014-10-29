@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface AppDelegate ()
 
@@ -20,6 +21,8 @@
     
     [Parse setApplicationId:@"qOAtaOPnyktzYlgjLJaSZ4VQaXQaglxW8o6O9UDC" clientKey:@"YlLBXsiPKF0bXb53GM5KksH1awfBYR99c7ApTgXY"];
 
+    [FBLoginView class];
+    [FBProfilePictureView class];
     return YES;
 }
 
@@ -125,6 +128,14 @@
             abort();
         }
     }
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
 }
 
 @end
