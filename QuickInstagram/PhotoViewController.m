@@ -29,8 +29,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //checking if a user is logged
+    if ([PFUser currentUser] == nil) {
+        self.tabBarController.selectedIndex = 0;
+    }
     [[self tableView] reloadData];
     NSLog(@"user=%@", DatabaseManager.loggedUser);
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    //checking if a user is logged
+    if ([PFUser currentUser] == nil) {
+        self.tabBarController.selectedIndex = 0;
+    }
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {

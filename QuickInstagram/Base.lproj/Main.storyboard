@@ -416,6 +416,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VPU-TW-zi4" customClass="FBLoginView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="v9R-OL-sXS"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="v9R-OL-sXS"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="v9R-OL-sXS"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ns-6o-4wn">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -593,7 +606,7 @@
                                 <include reference="aJs-Mq-29x"/>
                                 <include reference="auS-qQ-Hbb"/>
                                 <include reference="8HS-Hb-Lx5"/>
-                                <include reference="CDQ-wa-wNY"/>
+                                <exclude reference="CDQ-wa-wNY"/>
                                 <include reference="Ji4-sa-tyA"/>
                                 <include reference="xWL-06-hjX"/>
                             </mask>

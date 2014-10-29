@@ -18,14 +18,27 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DatabaseManager.delegate = self
-        myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
+        if PFUser.currentUser() == nil {
+            myFriends = []
+            tabBarController?.selectedIndex = 0
+        }
+        else {
+            DatabaseManager.delegate = self
+            myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
+        }
     }
+
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
-        myFriendsTableView.reloadData()
+        if PFUser.currentUser() == nil {
+            myFriends = []
+            tabBarController?.selectedIndex = 0
+        }
+        else {
+            DatabaseManager.delegate = self
+            myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
+        }
     }
     //MARK - delegate DB methods
     func loadDataFinished() {
