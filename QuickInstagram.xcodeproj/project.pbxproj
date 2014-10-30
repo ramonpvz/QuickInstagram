@@ -16,6 +16,8 @@
 		A5DDD1D719FF50B500A4DDB8 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDD1D419FF50B500A4DDB8 /* DatabaseManager.swift */; };
 		A5DDD1D819FF50B500A4DDB8 /* MyFriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDD1D519FF50B500A4DDB8 /* MyFriendsListViewController.swift */; };
 		A5DDD1D919FF50B500A4DDB8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDD1D619FF50B500A4DDB8 /* User.swift */; };
+		C333352F1A018069006DFDA0 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C333352E1A018069006DFDA0 /* CommentViewController.m */; };
+		C33335321A01A05B006DFDA0 /* IUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C33335311A01A05B006DFDA0 /* IUser.m */; };
 		C33AF60319FEE3DC00AAD6C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60219FEE3DC00AAD6C2 /* main.m */; };
 		C33AF60619FEE3DC00AAD6C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60519FEE3DC00AAD6C2 /* AppDelegate.m */; };
 		C33AF60919FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C33AF60719FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld */; };
@@ -39,7 +41,6 @@
 		C395D7BC1A005E0700F2373A /* IPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = C395D7BB1A005E0700F2373A /* IPhoto.m */; };
 		C395D7BF1A005F1D00F2373A /* ITopic.m in Sources */ = {isa = PBXBuildFile; fileRef = C395D7BE1A005F1D00F2373A /* ITopic.m */; };
 		C395D7C21A005FEB00F2373A /* IComment.m in Sources */ = {isa = PBXBuildFile; fileRef = C395D7C11A005FEB00F2373A /* IComment.m */; };
-		C395D7C51A00606700F2373A /* IUser.m in Sources */ = {isa = PBXBuildFile; fileRef = C395D7C41A00606700F2373A /* IUser.m */; };
 		C395D7C81A00648C00F2373A /* ILike.m in Sources */ = {isa = PBXBuildFile; fileRef = C395D7C71A00648C00F2373A /* ILike.m */; };
 		E41128B819FEF93D000F7837 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128B719FEF93D000F7837 /* MBProgressHUD.m */; };
 		E41128BB19FF031B000F7837 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E41128BA19FF031B000F7837 /* PhotoViewController.m */; };
@@ -72,6 +73,10 @@
 		A5DDD1D419FF50B500A4DDB8 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		A5DDD1D519FF50B500A4DDB8 /* MyFriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyFriendsListViewController.swift; sourceTree = "<group>"; };
 		A5DDD1D619FF50B500A4DDB8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C333352D1A018069006DFDA0 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		C333352E1A018069006DFDA0 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		C33335301A01A05B006DFDA0 /* IUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUser.h; sourceTree = "<group>"; };
+		C33335311A01A05B006DFDA0 /* IUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUser.m; sourceTree = "<group>"; };
 		C33AF5FD19FEE3DC00AAD6C2 /* QuickInstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickInstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33AF60119FEE3DC00AAD6C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C33AF60219FEE3DC00AAD6C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -105,8 +110,6 @@
 		C395D7BE1A005F1D00F2373A /* ITopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITopic.m; sourceTree = "<group>"; };
 		C395D7C01A005FEB00F2373A /* IComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IComment.h; sourceTree = "<group>"; };
 		C395D7C11A005FEB00F2373A /* IComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IComment.m; sourceTree = "<group>"; };
-		C395D7C31A00606700F2373A /* IUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUser.h; sourceTree = "<group>"; };
-		C395D7C41A00606700F2373A /* IUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUser.m; sourceTree = "<group>"; };
 		C395D7C61A00648C00F2373A /* ILike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILike.h; sourceTree = "<group>"; };
 		C395D7C71A00648C00F2373A /* ILike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ILike.m; sourceTree = "<group>"; };
 		E41128B619FEF93D000F7837 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -191,6 +194,8 @@
 		C33AF5FF19FEE3DC00AAD6C2 /* QuickInstagram */ = {
 			isa = PBXGroup;
 			children = (
+				C33335301A01A05B006DFDA0 /* IUser.h */,
+				C33335311A01A05B006DFDA0 /* IUser.m */,
 				A5DDD1D219FF508A00A4DDB8 /* FriendsListController.swift */,
 				A5DDD1D419FF50B500A4DDB8 /* DatabaseManager.swift */,
 				A5DDD1D519FF50B500A4DDB8 /* MyFriendsListViewController.swift */,
@@ -225,10 +230,10 @@
 				C395D7BE1A005F1D00F2373A /* ITopic.m */,
 				C395D7C01A005FEB00F2373A /* IComment.h */,
 				C395D7C11A005FEB00F2373A /* IComment.m */,
-				C395D7C31A00606700F2373A /* IUser.h */,
-				C395D7C41A00606700F2373A /* IUser.m */,
 				C395D7C61A00648C00F2373A /* ILike.h */,
 				C395D7C71A00648C00F2373A /* ILike.m */,
+				C333352D1A018069006DFDA0 /* CommentViewController.h */,
+				C333352E1A018069006DFDA0 /* CommentViewController.m */,
 			);
 			path = QuickInstagram;
 			sourceTree = "<group>";
@@ -383,11 +388,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C33335321A01A05B006DFDA0 /* IUser.m in Sources */,
 				A5DDD1D319FF508A00A4DDB8 /* FriendsListController.swift in Sources */,
 				A55CA0E919FF131F001E7F57 /* LoginViewController.swift in Sources */,
 				A5DDD1D719FF50B500A4DDB8 /* DatabaseManager.swift in Sources */,
 				C33AF60619FEE3DC00AAD6C2 /* AppDelegate.m in Sources */,
 				C33AF60919FEE3DC00AAD6C2 /* QuickInstagram.xcdatamodeld in Sources */,
+				C333352F1A018069006DFDA0 /* CommentViewController.m in Sources */,
 				C395D7BF1A005F1D00F2373A /* ITopic.m in Sources */,
 				C395D7B91A00588C00F2373A /* CollectionImageViewCell.m in Sources */,
 				C395D7C21A005FEB00F2373A /* IComment.m in Sources */,
@@ -400,7 +407,6 @@
 				A5DDD1D919FF50B500A4DDB8 /* User.swift in Sources */,
 				E4BE72331A0044A4004E0967 /* ImgCustomCell.m in Sources */,
 				C395D7BC1A005E0700F2373A /* IPhoto.m in Sources */,
-				C395D7C51A00606700F2373A /* IUser.m in Sources */,
 				E41128BB19FF031B000F7837 /* PhotoViewController.m in Sources */,
 				C33AF60319FEE3DC00AAD6C2 /* main.m in Sources */,
 				E41128BE19FF057A000F7837 /* PhotoDetailViewController.m in Sources */,

@@ -52,8 +52,15 @@
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [searchBar resignFirstResponder];
     [self refreshDisplay];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
 }
 
 - (void) refreshDisplay {
@@ -69,6 +76,7 @@
         {
             self.results = objects;
             [self.tableView reloadData];
+            self.searchDisplayController.active = NO;
         }
     }];
 }
@@ -77,7 +85,7 @@
 
 - (IBAction)refresh:(id)sender
 {
-
+    
     NSLog(@"Showing Refresh HUD");
     self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.refreshHUD];

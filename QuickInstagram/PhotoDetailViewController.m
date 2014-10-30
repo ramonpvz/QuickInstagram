@@ -8,6 +8,7 @@
 
 #import "PhotoDetailViewController.h"
 #import "ILike.h"
+#import "QuickInstagram-Swift.h"
 
 @interface PhotoDetailViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
@@ -40,19 +41,26 @@
 }
 
 - (IBAction)like:(id)sender {
-    
-    ILike *like = [ILike object];
-    IUser *user = [IUser object];
-    user.name = @"Mary";
-    user.gender = @"Female";
-    user.quote = @"Anything...";
-    like.user = user;
-    like.photo = self.photo;
 
+    PFUser *user = DatabaseManager.loggedUser;
+    ILike *like = [ILike object];
+    [like setObject:user forKey:@"user"];
+    like.photo = self.photo;
     [like saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"Like saved...");
         [self displayLikes];
     }];
+
+//    ILike *like = [ILike object];
+//    User *user = DatabaseManager.loggedUser;
+//    user.name = @"Mary";
+//    like.user = user;
+//    like.photo = self.photo;
+//
+//    [like saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        NSLog(@"Like saved...");
+//        [self displayLikes];
+//    }];
 
 }
 

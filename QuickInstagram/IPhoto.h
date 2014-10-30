@@ -9,13 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "ITopic.h"
-#import "IUser.h"
 
 @interface IPhoto : PFObject <PFSubclassing>
 
 @property PFFile *image;
 @property ITopic *topic;
-@property IUser *user;
 @property NSString *caption;
+@property PFUser *user;
 
 @end

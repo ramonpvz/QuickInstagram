@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "IPhoto.h"
-#import "IUser.h"
 
 @interface ILike : PFObject <PFSubclassing>
 
-@property IUser *user;
+@property PFUser *user;
 @property IPhoto *photo;
 
 @end
