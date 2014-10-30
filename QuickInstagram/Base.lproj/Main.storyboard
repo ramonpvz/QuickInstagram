@@ -140,7 +140,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xQ4-Or-gWd">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="-64" y="83" width="95" height="88"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="118" height="107"/>
                                                     </variation>
                                                 </imageView>
                                             </subviews>
@@ -343,7 +343,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="NXG-is-6GY" kind="show" id="xUs-7K-xgs"/>
+                                    <segue destination="NXG-is-6GY" kind="show" identifier="commentSegue" id="xUs-7K-xgs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8H-rf-LKd">
@@ -389,6 +389,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="countComments" destination="U8H-rf-LKd" id="VGc-va-jCL"/>
                         <outlet property="countLikes" destination="3hI-fl-LdB" id="4vA-P8-3Gx"/>
                         <outlet property="imageView" destination="fOG-VG-PFj" id="j1o-rc-R4l"/>
                     </connections>
@@ -415,7 +416,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="BRP-9R-DVE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="BRP-9R-DVE">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -427,9 +428,6 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="oKs-Tb-feK" id="8NK-OF-Ya5"/>
                                     <outlet property="delegate" destination="oKs-Tb-feK" id="EW0-RK-cgl"/>
@@ -437,6 +435,28 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mqS-VG-DZw" firstAttribute="top" secondItem="BRP-9R-DVE" secondAttribute="bottom" id="2Zl-3i-3Lt"/>
+                            <constraint firstAttribute="trailing" secondItem="BRP-9R-DVE" secondAttribute="trailing" id="CQt-jF-CSv"/>
+                            <constraint firstItem="BRP-9R-DVE" firstAttribute="leading" secondItem="2Wr-1x-4Ph" secondAttribute="leading" id="s0K-ew-NA5"/>
+                            <constraint firstItem="BRP-9R-DVE" firstAttribute="top" secondItem="2Wr-1x-4Ph" secondAttribute="top" id="uXX-g1-xhL"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CQt-jF-CSv"/>
+                                <exclude reference="s0K-ew-NA5"/>
+                                <exclude reference="uXX-g1-xhL"/>
+                                <exclude reference="2Zl-3i-3Lt"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="CQt-jF-CSv"/>
+                                <include reference="s0K-ew-NA5"/>
+                                <include reference="uXX-g1-xhL"/>
+                                <include reference="2Zl-3i-3Lt"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="iP6-dm-e9D">
                         <nil key="title"/>
@@ -446,10 +466,20 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Xb6-P0-01t"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Xb6-P0-01t">
+                            <connections>
+                                <action selector="saveComment:" destination="oKs-Tb-feK" id="QyJ-MF-LTj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="commentTxt" destination="BFX-JO-ant" id="V34-3Y-4Ot"/>
+                        <outlet property="tableView" destination="BRP-9R-DVE" id="DUr-Ft-NdH"/>
+                        <segue destination="6DG-wD-ksQ" kind="unwind" identifier="unwindComment" unwindAction="unwindCommentViewController:" id="EXf-jU-8mC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaE-1O-fKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="6DG-wD-ksQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3486" y="237"/>
         </scene>
@@ -1258,7 +1288,7 @@
         <image name="inbox" width="32" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vif-Qw-C0a"/>
         <segue reference="lAP-el-7dY"/>
-        <segue reference="1JG-An-eab"/>
     </inferredMetricsTieBreakers>
 </document>

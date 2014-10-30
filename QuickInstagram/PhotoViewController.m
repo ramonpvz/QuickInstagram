@@ -25,9 +25,12 @@
 @property NSArray *topics;
 @property MBProgressHUD *HUD;
 @property MBProgressHUD *refreshHUD;
+@property UIRefreshControl *refreshControl;
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentControl;
+@property NSString *criteria;
 
 @end
 
@@ -42,6 +45,10 @@
     [[self tableView] reloadData];
     //NSLog(@"user=%@", DatabaseManager.loggedUser);
     self.topics = [[NSArray alloc]init];
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(refreshDisplay) forControlEvents:UIControlEventValueChanged];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -65,9 +72,11 @@
 }
 
 - (void) refreshDisplay {
-    NSLog(@"Searching for: %@",self.searchBar.text);
+    NSLog(@"Searching for: %@",self.criteria);
+    if (![self.searchBar.text isEqualToString:@""])
+        self.criteria = self.searchBar.text;
     PFQuery *query = [PFQuery queryWithClassName:[ITopic parseClassName]];
-    [query whereKey:@"hashtag" equalTo:self.searchBar.text];
+    [query whereKey:@"hashtag" equalTo:self.criteria];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error)
         {
@@ -76,6 +85,7 @@
         else
         {
             self.results = objects;
+            [self.refreshControl endRefreshing];
             [self.tableView reloadData];
             self.searchDisplayController.active = NO;
         }

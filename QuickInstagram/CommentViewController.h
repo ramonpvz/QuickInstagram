@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPhoto.h"
 
 @interface CommentViewController : UIViewController
+
+@property IPhoto *photo;
+
+- (NSInteger) totalComments;
 
 @end
