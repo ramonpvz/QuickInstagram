@@ -15,7 +15,6 @@
 
 - (IBAction)refresh:(id)sender;
 - (IBAction)cameraButtonTapped:(id)sender;
-- (void)uploadImage:(NSData *)imageData caption:(NSString *)caption;
-- (void)setUpImages:(NSArray *)images;
+- (void)uploadImage:(NSData *)imageData caption:(NSString *)caption topic:(NSString *)hashtag;
 
 @end

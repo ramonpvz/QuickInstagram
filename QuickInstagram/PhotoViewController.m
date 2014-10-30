@@ -19,10 +19,10 @@
 
 @interface PhotoViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate>
 
-@property IBOutlet UIScrollView *photoScrollView;
 @property NSMutableArray *allImages;
 @property NSArray *filteredResults;
 @property NSArray *results;
+@property NSArray *topics;
 @property MBProgressHUD *HUD;
 @property MBProgressHUD *refreshHUD;
 
@@ -40,7 +40,8 @@
         self.tabBarController.selectedIndex = 0;
     }
     [[self tableView] reloadData];
-    NSLog(@"user=%@", DatabaseManager.loggedUser);
+    //NSLog(@"user=%@", DatabaseManager.loggedUser);
+    self.topics = [[NSArray alloc]init];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -85,52 +86,7 @@
 
 - (IBAction)refresh:(id)sender
 {
-    
-    NSLog(@"Showing Refresh HUD");
-    self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:self.refreshHUD];
 
-    // Register for HUD callbacks so we can remove it from the window at the right time
-    self.refreshHUD.delegate = self;
-
-    // Show the HUD while the provided method executes in a new thread
-    [self.refreshHUD show:YES];
-
-    /*PFQuery *query = [PFQuery queryWithClassName:@"UserPhoto"];
-    PFUser *user = [PFUser currentUser];
-    [query whereKey:@"user" equalTo:user];
-    [query orderByAscending:@"createdAt"];
-
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            if (self.refreshHUD) {
-                [self.refreshHUD hide:YES];
-
-                self.refreshHUD = [[MBProgressHUD alloc] initWithView:self.view];
-                [self.view addSubview:self.refreshHUD];
-
-                self.refreshHUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-
-                // Set custom view mode
-                self.refreshHUD.mode = MBProgressHUDModeCustomView;
-
-                self.refreshHUD.delegate = self;
-            }
-            NSLog(@"Successfully retrieved %lu photos.", objects.count);
-
-
-            // Array of images
-            [self setUpImages:self.allImages];
-
-        } else {
-            [self.refreshHUD hide:YES];
-
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];*/
-    [self.refreshHUD hide:YES];
 }
 
 - (IBAction)cameraButtonTapped:(id)sender
@@ -157,7 +113,7 @@
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
-- (void)uploadImage:(NSData *)imageData caption:(NSString *)caption
+- (void)uploadImage:(NSData *)imageData caption:(NSString *)caption topic:(NSString *)hashtag
 {
     PFFile *imageFile = [PFFile fileWithName:@"image.png" data:imageData];
 
@@ -188,24 +144,62 @@
             self.HUD.delegate = self;
 
             // Create a PFObject around a PFFile and associate it with the current user
-            PFObject *userPhoto = [PFObject objectWithClassName:@"Photo"];
-            [userPhoto setObject:imageFile forKey:@"image"];
-            [userPhoto setObject:caption forKey:@"caption"];
-
             PFUser *user = DatabaseManager.loggedUser;
+            IPhoto *photo = [IPhoto object];
 
-            // Set the access control list to current user for security purposes
-            userPhoto.ACL = [PFACL ACLWithUser:user];
+            // Search topic
+            NSLog(@"Searching topic for: %@",hashtag);
 
-            [userPhoto setObject:user forKey:@"user"];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"hashtag=%@",hashtag];
+            PFQuery *queryTopic = [PFQuery queryWithClassName:[ITopic parseClassName] predicate:predicate];
 
-            [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error) {
-                    [self refresh:nil];
+            [queryTopic findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error){
+                    NSLog(@"Error: %@", error.userInfo);
                 }
                 else{
-                    // Log details of the failure
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                    self.topics = objects;
+                    NSLog(@"topics: %lu",self.topics.count);
+
+                    photo.image = imageFile;
+                    photo.caption = caption;
+                    photo.user = user;
+                    // Set the access control list to current user for security purposes
+                    photo.ACL = [PFACL ACLWithUser:user];
+
+                    if (self.topics.count > 0) {
+                        for (ITopic *topicFound in self.topics) {
+                            if ([topicFound.hashtag isEqualToString:hashtag]) {
+                                NSLog(@"topic found: %@",topicFound.objectId);
+                                photo.topic = topicFound;
+                                [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"Image saved");
+                                        [self refresh:nil];
+                                    }else{
+                                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+                                    }
+                                }];
+                            }
+                        }
+                    }else{
+                        ITopic *topic = [ITopic object];
+                        topic.hashtag = hashtag;
+                        [topic saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            if (!error) {
+                                NSLog(@"topic new: %@",topic.objectId);
+                                photo.topic = topic;
+                                [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"Image saved");
+                                        [self refresh:nil];
+                                    }else{
+                                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+                                    }
+                                }];
+                            }
+                        }];
+                    }
                 }
             }];
         }
@@ -218,11 +212,6 @@
         // Update your progress spinner here. percentDone will be between 0 and 100.
         self.HUD.progress = (float)percentDone/100;
     }];
-}
-
-- (void)setUpImages:(NSArray *)images
-{
-    NSLog(@"setupImages method");
 }
 
 
@@ -246,10 +235,12 @@
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Enter a caption";
     }];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Enter one Hastag";
+    }];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSLog(@"Uploading photo");
-        [self uploadImage:imageData caption:[alert.textFields[0] text]];
-
+        [self uploadImage:imageData caption:[alert.textFields[0] text] topic:[alert.textFields[1] text]];
     }];
 
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel upload" style:UIAlertActionStyleCancel handler:nil];

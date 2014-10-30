@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import "MBProgressHUD.h"
 
-@interface MyPhotosViewController : UIViewController
+@interface MyPhotosViewController : UIViewController <MBProgressHUDDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end
