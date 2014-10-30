@@ -39,6 +39,7 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
             DatabaseManager.delegate = self
             myFriends = DatabaseManager.toUser(DatabaseManager.loggedUser!).friends
         }
+        loadDataFinished()
     }
     //MARK - delegate DB methods
     func loadDataFinished() {
