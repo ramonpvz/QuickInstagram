@@ -25,7 +25,7 @@ class DatabaseManager : NSObject{
     }
 
 
-    class func getUser(userName : String) ->  User {
+    class func getUser(userName : String) ->  User? {
         var error : NSError?
 
         var qry = PFUser.query()
@@ -33,7 +33,12 @@ class DatabaseManager : NSObject{
 
         var qryObjects = qry.findObjects(&error)
 
-        return toUser(qryObjects[0] as PFUser)
+        if qryObjects.count > 0 {
+            return toUser(qryObjects[0] as PFUser)
+        }
+        else {
+            return nil
+        }
     }
 
     class func getUserAsPFUser(userName : String) ->  PFUser {
@@ -130,6 +135,11 @@ class DatabaseManager : NSObject{
         loggedUser?.saveInBackgroundWithBlock({ (succeeded : Bool, error : NSError!) -> Void in
             self.delegate!.loadDataFinished()
         })
+    }
+
+    class func login(user : String, password : String) -> PFUser? {
+        var error : NSError?
+        return PFUser.logInWithUsername(user, password: password, error: &error)
     }
 
     internal class var loggedUser: PFUser? {

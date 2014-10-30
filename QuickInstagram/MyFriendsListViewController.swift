@@ -61,8 +61,8 @@ class MyFriendsListViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     @IBAction func logout(sender: UIBarButtonItem) {
-        PFUser.logOut()
-        DatabaseManager.loggedUser = PFUser.currentUser()
+        //PFUser.logOut()
+        //DatabaseManager.loggedUser = PFUser.currentUser()
         tabBarController?.selectedIndex = 0
     }
     
